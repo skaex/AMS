@@ -15,7 +15,7 @@ import os
 
 from django.core.exceptions import ImproperlyConfigured
 
-from secret_variables import *
+from secret.secret import *
 
 from secret.secret import *
 
