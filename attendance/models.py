@@ -5,6 +5,11 @@ from django.db import models
 
 
 class Person(models.Model):
+    """
+    an abstract base class (model) for holding attributes that are common to other
+    models. This model is ignored during migrations, thus doesn't translate into an
+    actual database table
+    """
     full_name = models.CharField(max_length=150)
     email = models.EmailField(blank=True, null=True)
     number = models.CharField(blank=True, max_length=20)
@@ -15,6 +20,9 @@ class Person(models.Model):
 
 
 class AttendanceStatus(models.Model):
+    """
+    various attendance status that can be attributed to a student
+    """
     name = models.CharField(max_length=255, unique=True,
                             help_text='"Present" will not be saved but will show as a teacher option.')
     code = models.CharField(max_length=10, unique=True,
