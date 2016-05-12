@@ -3,4 +3,4 @@ ams_dev*
 db.sqlite3
 __pycache__
 .idea
-ams/secrete_variables.py
+secret_variables.py
