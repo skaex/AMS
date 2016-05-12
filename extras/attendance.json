@@ -1,0 +1,40 @@
+{
+	"data": {
+		"course": {
+			"code": "WRI102",
+			"section": "2",
+			"description": "English Composition I",
+			"instructor": "Tristan M. Puvis"
+		},
+		"attendances": [
+			{
+				"student_aun_id": "A100345",
+				"names": "Ash Muhammed",
+				"email": "ash.muhammad@aun.edu.ng",
+				"statuses": [{
+					"date": "21223.0",
+					"status": "X"
+				}, {
+					"date": "21223.0",
+					"status": "L"
+				}]
+			},
+			{
+				"student_aun_id": "A100345",
+				"names": "Ash Muhammed",
+				"email": "ash.muhammad@aun.edu.ng",
+				"statuses": [{
+					"date": "21223.0",
+					"status": "X"
+				}, {
+					"date": "21223.0",
+					"status": "L"
+				}]
+			}
+		]
+	}
+}
+
+# note:
+# when python (the xlrd package that i'm going to use) extracts dates from excel cell contents, they're represented as a float, as sampled in the "dates" values above
+# count of dates will always be equal to count of attendance statuses per student.
