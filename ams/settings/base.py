@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 from django.core.exceptions import ImproperlyConfigured
+from ..secrete_variables import *
 
 from secret.secret import *
 
