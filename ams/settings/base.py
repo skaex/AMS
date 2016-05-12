@@ -30,7 +30,9 @@ def get_env_variable(var_name):
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
  
-SECRET_KEY = get_env_variable('SECRET_KEY')
+# SECRET_KEY = get_env_variable('SECRET_KEY')
+
+SECRET_KEY = "_eia&p6)m7f%z@qij6of83sqrh0^$y3-d2trpp%pkdglry5ff9"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # :) Taken care off
@@ -47,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'attendance',
 )
 
 MIDDLEWARE_CLASSES = (
