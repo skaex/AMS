@@ -6,18 +6,32 @@
 			"description": "English Composition I",
 			"instructor": "Tristan M. Puvis"
 		},
-		"attendances": {
-			"student_aun_id": "A100345",
-			"names": "Ash Muhammed",
-			"email": "ash.muhammad@aun.edu.ng",
-			"statuses": [{
-				"date": "21223.0",
-				"status": "X"
-			}, {
-				"date": "21223.0",
-				"status": "L"
-			}]
-		}
+		"attendances": [
+			{
+				"student_aun_id": "A100345",
+				"names": "Ash Muhammed",
+				"email": "ash.muhammad@aun.edu.ng",
+				"statuses": [{
+					"date": "21223.0",
+					"status": "X"
+				}, {
+					"date": "21223.0",
+					"status": "L"
+				}]
+			},
+			{
+				"student_aun_id": "A100345",
+				"names": "Ash Muhammed",
+				"email": "ash.muhammad@aun.edu.ng",
+				"statuses": [{
+					"date": "21223.0",
+					"status": "X"
+				}, {
+					"date": "21223.0",
+					"status": "L"
+				}]
+			}
+		]
 	}
 }
 
