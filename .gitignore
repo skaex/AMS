@@ -2,3 +2,4 @@ ams_dev/
 ams_dev*
 db.sqlite3
 __pycache__
+.idea
