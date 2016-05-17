@@ -4,3 +4,4 @@ db.sqlite3
 __pycache__
 .idea
 secret*
+/secret/secret.py

@@ -41,7 +41,7 @@
           <a class="navbar-brand" href="#">AUN AMS</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-             {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated %}
           <a href="{% url 'account:logout' %}"><p style="text-align: right; padding-top: 8px">Logout</p></a>
             {% else %}
           <a href="{% url 'account:login' %}"><p style="text-align: right; padding-top: 8px">Login</p></a>
@@ -53,8 +53,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="height: 90%">
       <div class="container">
-{#          {% if request.user.is_authenticated %}#}
-{#          {% endif %}#}
+
         {% block content %}
         {% endblock %}
 

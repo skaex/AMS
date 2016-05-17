@@ -15,7 +15,8 @@ import os
 
 from django.core.exceptions import ImproperlyConfigured
 
-from secret.secret import *
+from .secret import *
+from django.core.urlresolvers import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -52,6 +53,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'attendance',
+    'account',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -119,3 +121,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+#where to redirect after login
+LOGIN_REDIRECT_URL = reverse_lazy('account:upload_file')
+LOGIN_URL = reverse_lazy('account:login')
+LOGOUT_URL = reverse_lazy('account:logout')
