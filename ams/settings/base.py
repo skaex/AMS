@@ -17,6 +17,8 @@ from django.core.exceptions import ImproperlyConfigured
 
 from secret.secret import *
 
+from secret.secret import *
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
