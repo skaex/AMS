@@ -34,7 +34,7 @@
 		]
 	}
 }
-
-# note:
-# when python (the xlrd package that i'm going to use) extracts dates from excel cell contents, they're represented as a float, as sampled in the "dates" values above
-# count of dates will always be equal to count of attendance statuses per student.
+//
+//# note:
+//# when python (the xlrd package that i'm going to use) extracts dates from excel cell contents, they're represented as a float, as sampled in the "dates" values above
+//# count of dates will always be equal to count of attendance statuses per student.
