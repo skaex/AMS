@@ -9,4 +9,5 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', home, name='home'),
+    url(r'^attendance/', include('attendance.urls', namespace='attendance')),
 ]

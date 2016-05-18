@@ -6,7 +6,7 @@ IMPORT_FILE_TYPES = ['.xls', '.xlsx']
 
 
 class AttendanceImportForm(forms.Form):
-    input_excel = forms.FileField(required=True, label="Upload the attendance Excel file.")
+    input_excel = forms.FileField(required=True, label="Upload Excel file.")
 
     def clean_input_excel(self):
         input_excel = self.cleaned_data['input_excel']

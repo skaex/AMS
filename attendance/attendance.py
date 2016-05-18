@@ -17,7 +17,8 @@ class Attendance(object):
         date = datetime.datetime(*xlrd.xldate_as_tuple(xl_date, 0))
         return date
 
-    def get_sheet(self, excel_file):
+    @staticmethod
+    def get_sheet(excel_file):
         """
         gets excel file and extracts the attendance sheet from it
         Asumption: attendance information is always on the first sheet of eact book (excel file)
@@ -32,7 +33,8 @@ class Attendance(object):
         attendance_sheet = book.sheet_by_index(0) # assuming attendance is on first sheet
         return attendance_sheet
 
-    def course(self, attendance_sheet):
+    @staticmethod
+    def course(attendance_sheet):
         """
         This method takes in an attendance sheet as parameter and returns the course information
         including the teacher's name
@@ -98,7 +100,8 @@ class Attendance(object):
         course_data = self.course(attendance_sheet)
         attendance_data = self.attendances(attendance_sheet)
         data = {'data': {'course': course_data, 'attendances': attendance_data}}
-        return simplejson.dumps(data)
+        # return simplejson.dumps(data) # changed this from json to lists because json is not easily read in templates
+        return data
 
 
 # uncomment the following lines and use them for testing the script
