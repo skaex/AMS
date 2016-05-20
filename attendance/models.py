@@ -11,9 +11,8 @@ class Person(models.Model):
     actual database table
     """
     full_name = models.CharField(max_length=150)
-    email = models.EmailField(blank=True, null=True)
-    number = models.CharField(blank=True, max_length=20)
-    gender = models.CharField(max_length=7, choices=(('M', 'Male'), ('F', 'Female')))
+    number = models.CharField(blank=True, max_length=20, null=True)
+    gender = models.CharField(max_length=7, blank=True, null=True, choices=(('M', 'Male'), ('F', 'Female')))
 
     class Meta:
         abstract = True
@@ -37,6 +36,8 @@ class AttendanceStatus(models.Model):
 
 
 class Instructor(Person):
+    email = models.EmailField(blank=True, null=True)
+
     class Meta:
         ordering = ("full_name",)
 
@@ -52,6 +53,7 @@ class Instructor(Person):
 
 
 class Student(Person):
+    email = models.EmailField()
     student_id = models.CharField(max_length=10)
 
     class Meta:
@@ -97,7 +99,7 @@ class CourseSectionAttendance(models.Model):
     course_section = models.ForeignKey(CourseSection)
     date = models.DateField(default=datetime.datetime.now)
     time_in = models.TimeField(blank=True, null=True)
-    status = models.ForeignKey(AttendanceStatus)
+    status = models.ForeignKey(AttendanceStatus, blank=True, null=True)
     notes = models.CharField(max_length=500, blank=True)
 
     def __str__(self):

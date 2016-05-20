@@ -1,5 +1,4 @@
 import os
-
 from django import forms
 
 IMPORT_FILE_TYPES = ['.xls', '.xlsx']
@@ -16,3 +15,7 @@ class AttendanceImportForm(forms.Form):
                 '{} is not a valid excel file. Please make sure your input file is an excel file'.format(extension))
         else:
             return input_excel
+
+
+class AttendanceSubmitForm(forms.Form):
+    pass
