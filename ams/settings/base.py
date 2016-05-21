@@ -47,6 +47,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,6 +77,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.core.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -121,3 +123,40 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+# configuration settings for the django suit custom admin page app
+SUIT_CONFIG = {
+    # header
+    'ADMIN_NAME': 'AUN AMS',
+    'HEADER_DATE_FORMAT': 'l, j. F Y',
+    'HEADER_TIME_FORMAT': 'h:i A',
+
+    # forms
+    'SHOW_REQUIRED_ASTERISK': True,  # Default True
+    'CONFIRM_UNSAVED_CHANGES': True,  # Default True
+
+    # menu
+    # 'SEARCH_URL': '/admin/auth/user/', # use, 'SEARCH_URL': ''  to remove the search box
+    'SEARCH_URL': '',  # use, 'SEARCH_URL': ''  to remove the search box
+    'MENU_ICONS': {
+        'sites': 'icon-leaf',
+        'auth': 'icon-lock',
+    },
+    'MENU_OPEN_FIRST_CHILD': False,  # Default True
+    # 'MENU_EXCLUDE': ('auth.group',),
+    'MENU': (
+        'sites',
+        {'app': 'auth', 'label': 'Authorization', 'icon': 'icon-lock', 'models': ('user', 'group')},
+        {'app': 'attendance', 'icon': 'icon-pen',
+         'models': ('student',
+                    'instructor',
+                    'course',
+                    'coursesection',
+                    'coursesectionattendance',
+                    )},
+
+    ),
+
+    # misc
+    'LIST_PER_PAGE': 15
+}
