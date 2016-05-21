@@ -14,13 +14,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 from django.core.exceptions import ImproperlyConfigured
-
-from secret.secret import *
+from django.core.urlresolvers import reverse_lazy
 
 from secret.secret import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -34,7 +35,8 @@ def get_env_variable(var_name):
     except KeyError:
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
- 
+
+
 # SECRET_KEY = get_env_variable('SECRET_KEY')
 SECRET_KEY = SECRET_KEY
 
@@ -42,7 +44,6 @@ SECRET_KEY = SECRET_KEY
 # :) Taken care off
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -55,6 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'attendance',
+    'account',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,7 +91,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ams.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -99,7 +100,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -113,7 +113,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -160,3 +159,8 @@ SUIT_CONFIG = {
     # misc
     'LIST_PER_PAGE': 15
 }
+
+# where to redirect after login
+LOGIN_REDIRECT_URL = reverse_lazy('account:upload_file')
+LOGIN_URL = reverse_lazy('account:login')
+LOGOUT_URL = reverse_lazy('account:logout')
