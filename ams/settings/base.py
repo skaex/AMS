@@ -48,7 +48,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'suit',
+    # 'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -161,6 +161,6 @@ SUIT_CONFIG = {
 }
 
 # where to redirect after login
-LOGIN_REDIRECT_URL = reverse_lazy('account:upload_file')
-LOGIN_URL = reverse_lazy('account:login')
-LOGOUT_URL = reverse_lazy('account:logout')
+# LOGIN_REDIRECT_URL = reverse_lazy('account:upload_file')
+# LOGIN_URL = reverse_lazy('account:login')
+# LOGOUT_URL = reverse_lazy('account:logout')
