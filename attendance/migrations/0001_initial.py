@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import datetime
 
 
 class Migration(migrations.Migration):
@@ -12,31 +11,18 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='AttendanceStatus',
-            fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('name', models.CharField(unique=True, help_text='"Present" will not be saved but will show as a teacher option.', max_length=255)),
-                ('code', models.CharField(unique=True, help_text='Short code used on attendance reports. Ex: A might be the code for the name Absent', max_length=10)),
-            ],
-            options={
-                'verbose_name_plural': 'Attendance Statuses',
-            },
-        ),
-        migrations.CreateModel(
             name='Course',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('is_active', models.BooleanField(default=True)),
-                ('code', models.CharField(unique=True, verbose_name='Course Code', max_length=7)),
-                ('title', models.CharField(unique=True, verbose_name='Course Title', max_length=255)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('code', models.CharField(unique=True, max_length=7, verbose_name='Course Code')),
+                ('title', models.CharField(unique=True, max_length=255, verbose_name='Course Title')),
                 ('description', models.TextField(blank=True)),
             ],
         ),
         migrations.CreateModel(
             name='CourseSection',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('is_active', models.BooleanField(default=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
                 ('section_number', models.PositiveSmallIntegerField()),
                 ('course', models.ForeignKey(to='attendance.Course', related_name='sections')),
             ],
@@ -44,22 +30,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CourseSectionAttendance',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
-                ('date', models.DateField(default=datetime.datetime.now)),
-                ('time_in', models.TimeField(null=True, blank=True)),
-                ('notes', models.CharField(blank=True, max_length=500)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('date', models.DateTimeField()),
+                ('time_in', models.TimeField(blank=True, null=True)),
+                ('status', models.CharField(choices=[('A', 'Absent'), ('L', 'Late'), ('X', 'Present')], max_length=50, blank=True, null=True)),
+                ('notes', models.CharField(max_length=500, blank=True, null=True)),
                 ('course_section', models.ForeignKey(to='attendance.CourseSection')),
-                ('status', models.ForeignKey(to='attendance.AttendanceStatus')),
             ],
         ),
         migrations.CreateModel(
             name='Instructor',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
                 ('full_name', models.CharField(max_length=150)),
-                ('email', models.EmailField(null=True, blank=True, max_length=254)),
-                ('number', models.CharField(blank=True, max_length=20)),
-                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=7)),
+                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=7, blank=True, null=True)),
+                ('email', models.EmailField(max_length=254, blank=True, null=True)),
             ],
             options={
                 'ordering': ('full_name',),
@@ -68,12 +53,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Student',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
+                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
                 ('full_name', models.CharField(max_length=150)),
-                ('email', models.EmailField(null=True, blank=True, max_length=254)),
-                ('number', models.CharField(blank=True, max_length=20)),
-                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=7)),
-                ('student_id', models.CharField(max_length=10)),
+                ('gender', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=7, blank=True, null=True)),
+                ('email', models.EmailField(max_length=254)),
+                ('student_id', models.CharField(unique=True, max_length=10)),
             ],
             options={
                 'ordering': ('full_name',),
@@ -86,12 +70,12 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='coursesection',
-            name='enrollments',
-            field=models.ManyToManyField(to='attendance.Student', blank=True),
+            name='enrollment',
+            field=models.ManyToManyField(blank=True, to='attendance.Student'),
         ),
         migrations.AddField(
             model_name='coursesection',
-            name='teachers',
-            field=models.ManyToManyField(to='attendance.Instructor', blank=True),
+            name='instructors',
+            field=models.ManyToManyField(blank=True, to='attendance.Instructor'),
         ),
     ]

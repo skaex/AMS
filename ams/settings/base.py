@@ -14,14 +14,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 from django.core.exceptions import ImproperlyConfigured
-
-from .secret import *
 from django.core.urlresolvers import reverse_lazy
 
 from secret.secret import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -35,7 +35,8 @@ def get_env_variable(var_name):
     except KeyError:
         error_msg = "Set the %s environment variable" % var_name
         raise ImproperlyConfigured(error_msg)
- 
+
+
 # SECRET_KEY = get_env_variable('SECRET_KEY')
 SECRET_KEY = SECRET_KEY
 
@@ -44,10 +45,10 @@ SECRET_KEY = SECRET_KEY
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
+    # 'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,6 +61,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -78,17 +80,18 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.core.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'ams.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -99,7 +102,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -114,7 +116,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
@@ -124,7 +125,44 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-#where to redirect after login
-LOGIN_REDIRECT_URL = reverse_lazy('account:upload_file')
-LOGIN_URL = reverse_lazy('account:login')
-LOGOUT_URL = reverse_lazy('account:logout')
+# configuration settings for the django suit custom admin page app
+SUIT_CONFIG = {
+    # header
+    'ADMIN_NAME': 'AUN AMS',
+    'HEADER_DATE_FORMAT': 'l, j. F Y',
+    'HEADER_TIME_FORMAT': 'h:i A',
+
+    # forms
+    'SHOW_REQUIRED_ASTERISK': True,  # Default True
+    'CONFIRM_UNSAVED_CHANGES': True,  # Default True
+
+    # menu
+    # 'SEARCH_URL': '/admin/auth/user/', # use, 'SEARCH_URL': ''  to remove the search box
+    'SEARCH_URL': '',  # use, 'SEARCH_URL': ''  to remove the search box
+    'MENU_ICONS': {
+        'sites': 'icon-leaf',
+        'auth': 'icon-lock',
+    },
+    'MENU_OPEN_FIRST_CHILD': False,  # Default True
+    # 'MENU_EXCLUDE': ('auth.group',),
+    'MENU': (
+        'sites',
+        {'app': 'auth', 'label': 'Authorization', 'icon': 'icon-lock', 'models': ('user', 'group')},
+        {'app': 'attendance', 'icon': 'icon-pen',
+         'models': ('student',
+                    'instructor',
+                    'course',
+                    'coursesection',
+                    'coursesectionattendance',
+                    )},
+
+    ),
+
+    # misc
+    'LIST_PER_PAGE': 15
+}
+
+# where to redirect after login
+# LOGIN_REDIRECT_URL = reverse_lazy('account:upload_file')
+# LOGIN_URL = reverse_lazy('account:login')
+# LOGOUT_URL = reverse_lazy('account:logout')

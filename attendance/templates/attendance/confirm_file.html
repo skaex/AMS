@@ -1,0 +1,43 @@
+{#{% extends "base.html" %}#}
+{% load static %}
+
+{% block title %}
+    {#    Confirm attendance#}
+{% endblock %}
+
+{% block content %}
+    {#    {{ attendance_json }}#}
+    <p><strong>Instructor: </strong> {{ attendance_json.data.course.instructor }}</p>
+    <p><strong>Course Code: </strong>{{ attendance_json.data.course.code }}</p>
+    <p><strong>Course Title: </strong>{{ attendance_json.data.course.description }}</p>
+    <p><strong>Course Section: </strong>{{ attendance_json.data.course.section }}</p>
+    <table border="1" layout-padding="5" cellpadding="5">
+        <tr>
+            <th>Student ID</th>
+            <th>Student Names</th>
+            <th>Student Email</th>
+            {% for date in attendance_json.data.attendances.0.statuses %}
+                <th style="font-size: xx-small;">{{ date.date }}</th>
+            {% endfor %}
+        </tr>
+        {% for item in attendance_json.data.attendances %}
+            <tr>
+                <td>{{ item.student_aun_id }}</td>
+                <td>{{ item.names }}</td>
+                <td>{{ item.email }}</td>
+                {% for status in item.statuses %}
+                    <td>{{ status.status }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{#    <form action="submit/" method="POST" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ form }}#}
+{#        <input type="hidden" name="file" value="{{ file }}">#}
+{#        <input type="submit" class="submit_btn btn label-success" value="Submit"/>#}
+{#    </form>#}
+    <td><a href="{% url "attendance:submit" %}">Submit</a></td>
+    <td><a href="{% url "attendance:upload" %}">cancel</a></td>
+
+{% endblock %}

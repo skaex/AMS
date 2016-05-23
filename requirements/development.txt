@@ -1,2 +1,4 @@
 -r base.txt
 xlrd==0.9.4
+simplejson==3.8.2
+django-suit==0.2.18

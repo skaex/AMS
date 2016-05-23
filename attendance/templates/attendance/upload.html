@@ -1,0 +1,16 @@
+{#{% extends "base.html" %}#}
+{% load static %}
+
+{% block title %}
+    {#    Upload attendance#}
+{% endblock %}
+
+{% block content %}
+{#    {% if thanks %}{{ thanks }}{% endif %}#}
+    {{ thanks }}
+    <form action="." method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form }}
+        <p><input type="submit" value="Upload Attendance"></p>
+    </form>
+{% endblock %}
