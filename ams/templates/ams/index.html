@@ -1,2 +1,38 @@
 {% extends "base.html" %}
-{% block head_title %} AMS {% endblock %}
+{% block title %} OIRE | Welcome {% endblock %}
+{% block content%}
+<div class="container">
+   	<div class="page-header">
+      <h1>OIRE  <small>| Office of Institutional Research and Effectiveness</small></h1>
+   	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="list-group">
+		        <a href="#" class="list-group-item">
+		          <h4 class="list-group-item-heading">FCE</h4>
+		          <p class="list-group-item-text">Faculty course evaluation application</p>
+		        </a>
+		        <a href="attendance/login" class="list-group-item">
+		          <h4 class="list-group-item-heading">CAM</h4>
+		          <p class="list-group-item-text">Attendance monitoring application</p>
+		        </a>
+		     </div>
+		</div>
+	</div>
+	
+
+	<blockquote class="pull-right">
+        <p>Want to help someone? Shut up and listen!</p>
+        <small>Ernesto Sirolli <cite title="Source Title">TED September 2012</cite></small>
+    </blockquote>
+
+</div>
+
+<!-- We'll need to remove this below and obey DRY -->
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">Copyright &#9400 2016 OIRE <a href="http://aun.edu.ng">American University of Nigeria.</a></p>
+  </div>
+</footer>
+	
+{% endblock %}

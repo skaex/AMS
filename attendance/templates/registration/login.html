@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %} OIRE | Welcome {% endblock %}
+{% block content%}
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">
+	        Attendance Monitoring System
+	      </a>
+	    </div>
+  </div>
+</nav>
+<div class="container login">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			  		<form class="form-horizontal" action="{% url 'attendance:login' %}" method="post">
+			  		{% csrf_token %}
+					    <fieldset>
+					        <legend>Login to AMS</legend>
+					        {% for field in form %}
+					            {% if field.errors %}
+					                <div class="control-group error">
+					                    <label class="control-label">{{ field.label }}</label> 
+					                    <div class="controls">{{ field }}
+					                        <span class="help-inline">
+					                            {% for error in  field.errors %}{{ error }}{% endfor %}
+					                        </span>
+					                    </div>
+					                </div>
+					            {% else %}
+					                <div class="control-group">
+					                    <label class="control-label">{{ field.label }}</label> 
+					                    <div class="controls">{{ field }}
+					                        {% if field.help_text %}
+					                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+					                        {% endif %}
+					                    </div>
+					                </div>
+					            {% endif %}
+					        {% endfor %}
+					    </fieldset>
+					    <br>
+					    <div class="form-actions">
+					        <button type="submit" class="btn btn-primary" >Login</button>
+					    </div>
+					</form>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- We'll need to remove this below and obey DRY -->
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted">Copyright &#9400 2016 OIRE AMS <a href="http://aun.edu.ng">American University of Nigeria</a> | Designed by the <a href="#">AMS Team</a></p>
+  </div>
+</footer>
+{% endblock %}

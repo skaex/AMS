@@ -12,32 +12,16 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-
-from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import reverse_lazy
-
 from secret.secret import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# A little function to help with getting the SECRET_KEY
-def get_env_variable(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        error_msg = "Set the %s environment variable" % var_name
-        raise ImproperlyConfigured(error_msg)
 
-
-# SECRET_KEY = get_env_variable('SECRET_KEY')
 SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -56,7 +40,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'attendance',
-    'account',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,7 +59,7 @@ ROOT_URLCONF = 'ams.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [ os.path.join(BASE_DIR, 'templates') ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,49 +103,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-
-# configuration settings for the django suit custom admin page app
-SUIT_CONFIG = {
-    # header
-    'ADMIN_NAME': 'AUN AMS',
-    'HEADER_DATE_FORMAT': 'l, j. F Y',
-    'HEADER_TIME_FORMAT': 'h:i A',
-
-    # forms
-    'SHOW_REQUIRED_ASTERISK': True,  # Default True
-    'CONFIRM_UNSAVED_CHANGES': True,  # Default True
-
-    # menu
-    # 'SEARCH_URL': '/admin/auth/user/', # use, 'SEARCH_URL': ''  to remove the search box
-    'SEARCH_URL': '',  # use, 'SEARCH_URL': ''  to remove the search box
-    'MENU_ICONS': {
-        'sites': 'icon-leaf',
-        'auth': 'icon-lock',
-    },
-    'MENU_OPEN_FIRST_CHILD': False,  # Default True
-    # 'MENU_EXCLUDE': ('auth.group',),
-    'MENU': (
-        'sites',
-        {'app': 'auth', 'label': 'Authorization', 'icon': 'icon-lock', 'models': ('user', 'group')},
-        {'app': 'attendance', 'icon': 'icon-pen',
-         'models': ('student',
-                    'instructor',
-                    'course',
-                    'coursesection',
-                    'coursesectionattendance',
-                    )},
-
-    ),
-
-    # misc
-    'LIST_PER_PAGE': 15
-}
-
-# where to redirect after login
-# LOGIN_REDIRECT_URL = reverse_lazy('account:upload_file')
-# LOGIN_URL = reverse_lazy('account:login')
-# LOGOUT_URL = reverse_lazy('account:logout')
